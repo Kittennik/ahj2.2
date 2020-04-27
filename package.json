@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "build": "webpack --mode-production",
+    "build": "webpack --mode production",
     "lint": "eslint .",
     "fix": "eslint --fix ../ahj2.2/"
   },
