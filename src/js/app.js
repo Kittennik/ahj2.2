@@ -39,37 +39,41 @@ class Sorting {
   }
 
   redrawDOM() {
-    const doc = document.getElementById('tbody');
-    doc.innerHTML = '';
-    for (const el of this.data) {
-      const tr = document.createElement('tr');
-      tr.dataset.id = el.id;
-      tr.dataset.title = el.title;
-      tr.dataset.year = el.year;
-      tr.dataset.imdb = el.imdb;
-      tr.innerHTML = `
+    if (typeof document !== 'undefined') {
+      const doc = document.getElementById('tbody');
+      doc.innerHTML = '';
+      for (const el of this.data) {
+        const tr = document.createElement('tr');
+        tr.dataset.id = el.id;
+        tr.dataset.title = el.title;
+        tr.dataset.year = el.year;
+        tr.dataset.imdb = el.imdb;
+        tr.innerHTML = `
             <td>${el.id}</td>
             <td>${el.title}</td>
             <td>(${el.year})</td>
             <td>imdb: ${el.imdb.toFixed(2)}</td>
           `;
-      doc.appendChild(tr);
+        doc.appendChild(tr);
+      }
     }
   }
 
   sortImg(columnSort, sortArrow) {
-    const oldRow = document.querySelector('span');
-    if (oldRow) {
-      const parentOldRow = oldRow.parentNode;
-      parentOldRow.removeChild(oldRow);
+    if (typeof document !== 'undefined') {
+      const oldRow = document.querySelector('span');
+      if (oldRow) {
+        const parentOldRow = oldRow.parentNode;
+        parentOldRow.removeChild(oldRow);
+      }
+
+      sortArrow === 'up' ? '\u{2191}' : '\u{2193}';
+
+      const titleHead = document.getElementById(`head-${columnSort}`);
+      const addArrow = document.createElement('span');
+      addArrow.innerText = sortArrow === 'up' ? '\u{2191}' : '\u{2193}';
+      titleHead.appendChild(addArrow);
     }
-
-    sortArrow === 'up' ? '\u{2191}' : '\u{2193}';
-
-    const titleHead = document.getElementById(`head-${columnSort}`);
-    const addArrow = document.createElement('span');
-    addArrow.innerText = sortArrow === 'up' ? '\u{2191}' : '\u{2193}';
-    titleHead.appendChild(addArrow);
   }
 
   sortStringDown(columnSort) {
